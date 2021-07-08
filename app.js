@@ -1,10 +1,80 @@
-/*
-we will play with the computer
-computer randomly selects one of three options - rock or paper or scissors through math random
-player selects one of three options - rock or paper or scissors in a prompt window
-*/
+const newGame = document.querySelector('#newGame');
+newGame.onclick = () => {
+   const h1 = document.querySelector('h1');
+   h1.textContent = 'Choose your destiny!';
+   const selection = ['rock', 'paper', 'scissors'];
+   let playerScoreSpan = document.querySelector("#playerScoreSpan");
+   let computerScoreSpan = document.querySelector("#computerScoreSpan");
+   const body = document.querySelector('body');
+   let playerScore = 0;
+   let computerScore = 0;
+   let finalScore = 0;
+   playerScoreSpan.textContent = 0;
+   computerScoreSpan.textContent = 0;
+   computerPara.textContent = '';
+   playerPara.textContent = '';
+   theScoreText.textContent = '';
 
+   //player play with addEventListener
+   const choices = document.querySelectorAll('.choice');
+   choices.forEach(choice => choice.addEventListener('click', playerPlay));
 
+   function playerPlay(e) {
+      let playerSelection = "";
+      if (e.target.id == "rock") {
+         playerSelection += "rock";
+         playerPara.textContent = 'You choose \"rock"';
+      } else if (e.target.id == "paper") {
+         playerSelection += "paper";
+         playerPara.textContent = 'You choose \"paper"';
+      } else if (e.target.id == "scissors") {
+         playerSelection += "scissors";
+         playerPara.textContent = 'You chose \"scissors"';
+      }
+
+      //computer play with math.random immediately after the player
+      const computerSelection = selection[Math.floor(Math.random() * selection.length)];
+      computerPara.textContent = `The computer chose "${computerSelection}"`;
+
+      //managing the score and printing them into h2's
+      if (computerSelection === playerSelection) {
+         theScoreText.textContent = `It's a tie!`;
+      } else if (computerSelection === 'rock' && playerSelection === 'paper') {
+         playerScore += 1;
+         theScoreText.textContent = 'You win! GG!';
+         playerScoreSpan.textContent = parseInt(playerScoreSpan.textContent) + 1;
+      } else if (computerSelection === 'rock' && playerSelection === 'scissors') {
+         computerScore += 1;
+         theScoreText.textContent = 'You lose...';
+         computerScoreSpan.textContent = parseInt(computerScoreSpan.textContent) + 1;
+      } else if (computerSelection === 'paper' && playerSelection === 'rock') {
+         computerScore += 1;
+         theScoreText.textContent = 'You lose...';
+         computerScoreSpan.textContent = parseInt(computerScoreSpan.textContent) + 1;
+      } else if (computerSelection === 'paper' && playerSelection === 'scissors') {
+         playerScore += 1;
+         theScoreText.textContent = 'You win! GG!';
+         playerScoreSpan.textContent = parseInt(playerScoreSpan.textContent) + 1;
+      } else if (computerSelection === 'scissors' && playerSelection === 'rock') {
+         playerScore += 1;
+         theScoreText.textContent = 'You win! GG!';
+         playerScoreSpan.textContent = parseInt(playerScoreSpan.textContent) + 1;
+      } else if (computerSelection === 'scissors' && playerSelection === 'paper') {
+         computerScore += 1;
+         theScoreText.textContent = 'You lose...';
+         computerScoreSpan.textContent = parseInt(computerScoreSpan.textContent) + 1;
+      }
+      if (playerScore == 5 && playerScore > computerScore) {
+         body.setAttribute('style', 'display:none;');
+         alert(`You win the entire game with ${playerScore} to ${computerScore}. Reload the page to play again!`);
+      } else if (computerScore == 5 && computerScore > playerScore) {
+         body.setAttribute('style', 'display:none;');
+         alert(`You lost the game... ${playerScore} to ${computerScore}. Reload the page to play again!`);
+      }
+   }
+}
+
+/**Version 1
 //main list of choices
 const selection = ['rock', 'paper', 'scissors'];
 
@@ -17,6 +87,7 @@ function computerPlay() {
 
 //player play with prompt
 function playerPlay() {
+
    const playerSelection = prompt("Enter your choice (rock, paper or scissors): ");
    if (playerSelection.toLowerCase() === 'rock' || playerSelection.toLowerCase() === 'paper' || playerSelection.toLowerCase() === 'scissors') {
       console.log(`You chose ${playerSelection}`);
@@ -68,23 +139,4 @@ let game = () => {
       console.log('You lost! Try again..');
    }
 }
-
-/*
-we compare computerSelection with playerSelection
-   IF computerSelection is rock AND playerSelection is paper
-      player wins
-   IF computerSelection is rock AND playerSelection is scissors
-      computer wins
-
-   IF computerSelection is paper AND playerSelection is rock
-      computer wins
-   IF computerSelection is paper AND playerSelection is scissors
-      player wins
-
-      IF computerSelection is scissors AND playerSelection is rock
-      player wins
-   IF computerSelection is scissors AND playerSelection is paper
-      computer wins
-   ELSE
-      it's a tie, restart game
 */

@@ -6,10 +6,37 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Rock Paper Scissors Game</title>
-   <script src="/app.js"></script>
+   <link rel="stylesheet" href="style.css">
+   <!-- <script src="/app.js"></script> -->
 </head>
 
 <body>
+
+   <h1>Press "New Game" to start</h1>
+
+   <div class="choices">
+      <div class="choice"><img id="rock" src="/images/rock.png">
+         <p>Rock</p>
+      </div>
+      <div class="choice"><img id="paper" src="/images/paper.png">
+         <p>Paper</p>
+      </div>
+      <div class="choice"><img id="scissors" src="/images/scissors.png">
+         <p>Scissors</p>
+      </div>
+   </div>
+
+   <h2 id="playerScore">Player: <span id="playerScoreSpan">0</span></h2>
+   <h2 id="computerScore">Computer: <span id="computerScoreSpan">0</span></h2>
+   <button id="newGame">New Game</button>
+
+   <div id="history">
+      <p id="playerPara"></p>
+      <p id="computerPara"></p>
+      <p id="theScoreText"></p>
+   </div>
+
+   <script src="app.js"></script>
 
 </body>
 
